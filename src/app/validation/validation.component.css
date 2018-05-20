@@ -1,5 +1,5 @@
 .form-area {
-  height: 80px;
+  height: 100px;
 }
 
 .input-network-address {
@@ -7,9 +7,12 @@
   height: 30px;
 }
 
+.validation-error-information {
+  height: 50px;
+  width: 100%;
+}
 .caution {
   color: rgba(255, 0, 0, 1);
-  width: 100%;
 }
 
 .label-common {

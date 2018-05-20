@@ -9,7 +9,7 @@
         [(ngModel)]="inputIP"
         #inputIPinfo="ngModel"
         required
-        minlength="{{networkAddressPattern}}"
+        minlength="{{minNetworkAddressLength}}"
         maxlength="{{maxNetworkAddressLength}}"
         pattern="{{networkAddressPattern}}"
         (keyup)="onKeyUp('inputIPinfo', inputIPinfo.errors)"
@@ -24,17 +24,19 @@
         [(ngModel)]="inputSubnetMask"
         #inputSubnetMaskInfo="ngModel"
         required
-        minlength="{{networkAddressPattern}}"
+        minlength="{{minNetworkAddressLength}}"
         maxlength="{{maxNetworkAddressLength}}"
         pattern="{{networkAddressPattern}}"
         (keyup)="onKeyUp('inputSubnetMaskInfo', inputSubnetMaskInfo.errors)"
       >
     </div>
-    <div class="caution" *ngIf="validationError">
-      <div [hidden]="!validationError?.required">※ 項目が未入力です</div>
-      <div [hidden]="!validationError?.minlength">※ 入力した内容が短すぎます</div>
-      <div [hidden]="!validationError?.maxlength">※ 入力した内容が長すぎます</div>
-      <div [hidden]="!validationError?.pattern">※ 入力した内容に誤りがあります</div>
+    <div class="validation-error-information">
+      <div class="caution" *ngIf="validationError">
+        <div [hidden]="!validationError?.required">※ 項目が未入力です</div>
+        <div [hidden]="!validationError?.minlength">※ 入力した内容が短すぎます</div>
+        <div [hidden]="!validationError?.maxlength">※ 入力した内容が長すぎます</div>
+        <div [hidden]="!validationError?.pattern">※ 入力した内容に誤りがあります</div>
+      </div>
     </div>
   </div>
   <div class="button-area">
