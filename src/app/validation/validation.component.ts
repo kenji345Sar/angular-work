@@ -42,6 +42,23 @@ export class ValidationComponent implements OnInit {
    */
   public readonly networkAddressPattern: string = '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])[¥.]){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$';
 
+  /**
+   * 入力エラー情報を画面に表示するためのプロパティ
+   *
+   * @type {*}
+   * @memberof ValidationComponent
+   */
+  public validationError: any;
+
+  /**
+   * 入力エラー情報を管理するためのリスト
+   *
+   * @private
+   * @type {*}
+   * @memberof ValidationComponent
+   */
+  private validationErrorList: any = [];
+
   constructor() { }
 
   ngOnInit() {
@@ -56,5 +73,57 @@ export class ValidationComponent implements OnInit {
    */
   public onClickOK($event) {
     alert('OK button had clicked.');
+  }
+
+  /**
+   * keyup イベントのイベントハンドラ
+   * このイベントをトリガーに入力エラー情報を管理する
+   *
+   * @param {any} validationKey
+   * @param {any} errorInformation
+   * @memberof ValidationComponent
+   */
+  public onKeyUp(validationKey, errorInformation) {
+    this.manageValidationError(validationKey, errorInformation)
+  }
+
+  /**
+   * 入力エラー情報を管理する
+   * 具体的には次の処理を行う
+   * # 引数の validationKey を元にエラー情報を一意に管理する
+   * # ビューに表示するためのエラー情報にリストの最後の情報をセットする
+   *
+   * @private
+   * @param {any} validationKey エラーが発生した入力フォーム
+   * @param {any} errorInformation バリデーションエラー情報
+   * @memberof ValidationComponent
+   */
+  private manageValidationError(validationKey, errorInformation) {
+    if (errorInformation) {
+      let isExist: boolean = false;
+      for (const target in this.validationErrorList) {
+        if (this.validationErrorList.hasOwnProperty(target) &&
+            this.validationErrorList[target].key === validationKey) {
+          isExist = true;
+          this.validationErrorList[target].error = errorInformation;
+          break;
+        }
+      }
+
+      if (!isExist) {
+        this.validationErrorList.push({ key: validationKey, error: errorInformation });
+      }
+    } else {
+      for (const target in this.validationErrorList) {
+        if (this.validationErrorList.hasOwnProperty(target) &&
+            this.validationErrorList[target].key === validationKey) {
+          this.validationErrorList.splice(target, 1);
+          break;
+        }
+      }
+    }
+
+    const errorData: any = this.validationErrorList[this.validationErrorList.length - 1];
+    this.validationError = errorData ? errorData.error : undefined;
   }
 }

@@ -1,8 +1,26 @@
-.input_ip_address {
-  width: inherit;
-  height: 50px;
+.form-area {
+  height: 80px;
 }
+
+.input-network-address {
+  width: inherit;
+  height: 30px;
+}
+
 .caution {
   color: rgba(255, 0, 0, 1);
   width: 100%;
+}
+
+.label-common {
+  width: 140px;
+  display: inline-block;
+}
+
+.button-area {
+  height: 50px;
+}
+
+.button-area .button-ok {
+  margin: 15px auto;
 }
