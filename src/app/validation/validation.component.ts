@@ -113,7 +113,8 @@ export class ValidationComponent implements OnInit {
         if (this.validationErrorList.hasOwnProperty(target) &&
             this.validationErrorList[target].key === validationKey) {
           isExist = true;
-          this.validationErrorList[target].error = errorInformation;
+          this.validationErrorList.splice(target, 1);
+          this.validationErrorList.push({ key: validationKey, error: errorInformation });
           break;
         }
       }
