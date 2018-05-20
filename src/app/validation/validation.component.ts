@@ -16,6 +16,14 @@ export class ValidationComponent implements OnInit {
   public inputIP: string = null;
 
   /**
+   * validaion のための双方向データバインドを行うプロパティ
+   *
+   * @type {string}
+   * @memberof ValidationComponent
+   */
+  public inputSubnetMask: string = null;
+
+  /**
    * 入力された内容の最小文字数チェック
    * IPアドレスの最小文字数である x.x.x.x の ７ を定義
    *
